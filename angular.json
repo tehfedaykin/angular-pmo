@@ -4,10 +4,10 @@
   "newProjectRoot": "projects",
   "projects": {
     "sample-pmo": {
-      "root": "",
+      "root": "sample-pmo",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "pmo",
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "less"
@@ -24,10 +24,16 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/place-my-order-assets/images/",
+                "output": "./assets/images"
+              }
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.less",
+              "./node_modules/place-my-order-assets/less/styles.less"
             ],
             "scripts": []
           },
