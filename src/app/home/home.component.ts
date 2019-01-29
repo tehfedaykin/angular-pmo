@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { isBoolean } from 'util';
 
 @Component({
   selector: 'pmo-home',

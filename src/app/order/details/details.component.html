@@ -1,0 +1,28 @@
+<h3>Thanks for your order {{order.name}}!</h3>
+<div><label class="control-label">
+  Confirmation Number: {{order._id}}</label>
+</div>
+
+<h4>Items ordered:</h4>
+<ul class="list-group panel">
+  {{#for(item of order.items)}}
+    <li class="list-group-item">
+      <label>
+        {{item.name}} <span class="badge">${{item.price}}</span>
+      </label>
+    </li>
+  {{/for}}
+
+  <li class="list-group-item">
+    <label>
+      Total <span class="badge">${{order.total}}</span>
+    </label>
+  </li>
+</ul>
+
+<div><label class="control-label">
+  Phone: {{order.phone}}
+</label></div>
+<div><label class="control-label">
+  Address: {{order.address}}
+</label></div>
