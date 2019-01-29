@@ -3,7 +3,16 @@
   
     <tabset>
       <tab heading="Lunch Menu" id="tab1">
-          This is the lunch menu
+        <ul class="list-group">
+            <!-- <li class="list-group-item" *ngFor="let item of restaurant.menu.lunch">
+              <label>
+                <input type="checkbox"
+                  on:change="this.order.items.toggle(item)"
+                  {{#if(this.order.items.has(item))}}checked{{/if}}>
+                {{item.name}} <span class="badge">${{item.price}}</span>
+              </label>
+            </li> -->
+        </ul>
       </tab>
       <tab heading="Dinner menu">
           This is the dinner menu

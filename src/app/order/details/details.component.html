@@ -5,13 +5,11 @@
 
 <h4>Items ordered:</h4>
 <ul class="list-group panel">
-  {{#for(item of order.items)}}
-    <li class="list-group-item">
-      <label>
-        {{item.name}} <span class="badge">${{item.price}}</span>
-      </label>
-    </li>
-  {{/for}}
+  <li class="list-group-item" *ngFor="let item of order.items">
+    <label>
+      {{item.name}} <span class="badge">${{item.price}}</span>
+    </label>
+  </li>
 
   <li class="list-group-item">
     <label>
