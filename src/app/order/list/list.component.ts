@@ -15,7 +15,7 @@ export class OrderListComponent implements OnInit {
   @Input() action: string;
   @Input() actionTitle: string;
   @Input() emptyMessage: string;
-
+  isPending: boolean = false;
   constructor() { }
 
   ngOnInit() {

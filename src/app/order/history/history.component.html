@@ -7,7 +7,7 @@
     </div>
 
     <pmo-order-list
-      [orders]="orders"
+      [orders]="newOrders"
       listTitle="New Orders"
       status="new"
       statusTitle="New Order!"
@@ -16,28 +16,31 @@
       emptyMessage="No new orders">
       </pmo-order-list>
 
-    <!-- <pmo-order-list
-      orders:from="this.statusPreparing"
-      listTitle:raw="Preparing"
-      status:raw="preparing"
-      statusTitle:raw="Preparing"
-      action:raw="delivery"
-      actionTitle:raw="Out for delivery"
-      emptyMessage:raw="No orders preparing"/>
+      <pmo-order-list
+      [orders]="preparingOrders"
+      listTitle="Preparing"
+      status="preparing"
+      statusTitle="Preparing"
+      action="delivery"
+      actionTitle="Out for delivery"
+      emptyMessage="No orders preparing">
+      </pmo-order-list>
 
-    <pmo-order-list
-      orders:from="this.statusDelivery"
-      listTitle:raw="Out for delivery"
-      status:raw="delivery"
-      statusTitle:raw="Out for delivery"
-      action:raw="delivered"
-      actionTitle:raw="Delivered"
-      emptyMessage:raw="No orders are being delivered"/>
+      <pmo-order-list
+      [orders]="deliveryOrders"
+      listTitle="Out for delivery"
+      status="delivery"
+      statusTitle="Out for delivery"
+      action="delivered"
+      actionTitle="Delivered"
+      emptyMessage="No orders are being delivered">
+      </pmo-order-list>
 
-    <pmo-order-list
-      orders:from="this.statusDelivered"
-      listTitle:raw="Delivered"
-      status:raw="delivered"
-      statusTitle:raw="Delivered"
-      emptyMessage:raw="No delivered orders"/> -->
+      <pmo-order-list
+      [orders]="deliveredOrders"
+      listTitle="Delivery"
+      status="delivered"
+      statusTitle="Delivered"
+      emptyMessage="No delivered orders">
+      </pmo-order-list>
   </div>

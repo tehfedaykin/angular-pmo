@@ -32,8 +32,8 @@ export class OrderService {
     return this.httpClient.post('/api/orders', formData)
   }
 
-  deleteOrder() {
-    return this.httpClient.delete('/api/orders')
+  deleteOrder(id: string) {
+    return this.httpClient.delete('/api/orders/' + id);
   }
 
 }

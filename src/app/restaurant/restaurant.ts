@@ -20,7 +20,7 @@ interface Images {
     banner: string;
 }
 
-export class Restaurant {
+export interface Restaurant {
     name: string;
     slug: string;
     images: Images;

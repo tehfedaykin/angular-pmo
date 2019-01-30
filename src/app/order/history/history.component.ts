@@ -22,9 +22,38 @@ export class OrderHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.orderService.getOrders().subscribe((res: Config<Order>) => {
-      console.log(res.data);
       this.orders.value = res.data;
     })
+
+    //subscribe to events for orders
   }
+
+  get newOrders() {
+    let orders =  this.orders.value.filter((order) => {
+      return order.status === "new";
+    });
+    return orders;
+  }
+
+   get preparingOrders() {
+    let orders =  this.orders.value.filter((order) => {
+      return order.status === "preparing";
+    });
+    return orders;
+   }
+
+   get deliveryOrders() {
+    let orders =  this.orders.value.filter((order) => {
+      return order.status === "delivery";
+    });
+    return orders;
+   }
+
+   get deliveredOrders() {
+    let orders =  this.orders.value.filter((order) => {
+      return order.status === "delivered";
+    });
+    return orders;
+   }
 
 }
