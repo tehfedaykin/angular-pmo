@@ -11,10 +11,13 @@ import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { HomeComponent } from './home/home.component';
-import { DetailComponent } from './restaurant/detail/detail.component';
+import { RestaurantDetailComponent } from './restaurant/detail/detail.component';
 import { ImageUrlPipe } from './image-url.pipe';
 import { OrderComponent } from './order/order.component';
-import { DetailsComponent } from './order/details/details.component';
+import { OrderDetailsComponent } from './order/details/details.component';
+import { MenuItemsComponent } from './order/menu-items/menu-items.component';
+import { OrderListComponent } from './order/list/list.component';
+import { OrderHistoryComponent } from './order/history/history.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +26,13 @@ import { DetailsComponent } from './order/details/details.component';
     MenuComponent,
     RestaurantComponent,
     HomeComponent,
-    DetailComponent,
+    RestaurantDetailComponent,
     ImageUrlPipe,
     OrderComponent,
-    DetailsComponent
+    OrderDetailsComponent,
+    MenuItemsComponent,
+    OrderListComponent,
+    OrderHistoryComponent
   ],
   imports: [
     BrowserModule,

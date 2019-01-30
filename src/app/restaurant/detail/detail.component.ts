@@ -11,10 +11,10 @@ import { Restaurant } from '../restaurant';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-export class DetailComponent implements OnInit {
+export class RestaurantDetailComponent implements OnInit {
   isPending$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   restaurant$: Observable<Config<Restaurant>>;
-  restaurant: Config<Restaurant>;
+  restaurant: Restaurant;
   isLoading: boolean = true;
 
   constructor(
@@ -30,7 +30,7 @@ export class DetailComponent implements OnInit {
 
     const slug = this.route.snapshot.paramMap.get('slug');
     this.restaurantService.getRestaurant(slug)
-     .subscribe((data:Config<Restaurant>) => {
+     .subscribe((data:Restaurant) => {
        this.restaurant = data;
        this.isLoading = false;
       });

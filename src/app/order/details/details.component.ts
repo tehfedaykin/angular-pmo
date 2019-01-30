@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Order } from '../../order.service';
 
 @Component({
-  selector: 'pmo-details',
+  selector: 'pmo-order-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
-export class DetailsComponent implements OnInit {
-
+export class OrderDetailsComponent implements OnInit {
+  @Input() order: Order;
   constructor() { }
 
   ngOnInit() {

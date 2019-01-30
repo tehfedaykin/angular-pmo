@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { RestaurantService, Config, City, State } from './restaurant.service';
 import { Restaurant } from './restaurant';
 
-export interface data<T> {
+export interface Data<T> {
   value: Array<T>;
   isPending: boolean;
 }
@@ -17,16 +17,16 @@ export interface data<T> {
 export class RestaurantComponent implements OnInit {
   form: FormGroup;
 
-  public restaurants: data<Restaurant> = {
+  public restaurants: Data<Restaurant> = {
     value: [],
-    isPending: true
+    isPending: false
   }
-  public states: data<State> = {
+  public states: Data<State> = {
     value: [],
     isPending: true
   }
 
-  public cities: data<City> = {
+  public cities: Data<City> = {
     value: [],
     isPending: true
   }
@@ -38,7 +38,6 @@ export class RestaurantComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.restaurants.isPending = true;
     this.createForm();
 
     this.restaurantService.getStates().subscribe((res: Config<State>) => {

@@ -38,6 +38,6 @@ export class RestaurantService {
   }
 
   getRestaurant(slug: string) {
-    return this.httpClient.get<Config<Restaurant>>('/api/restaurants/' + slug + '?');
+    return this.httpClient.get<Restaurant>('/api/restaurants/' + slug + '?');
   }
 }
