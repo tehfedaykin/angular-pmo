@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/for
 
 import { RestaurantService } from '../restaurant/restaurant.service';
 import { Restaurant } from '../restaurant/restaurant';
-import { OrderService, Order, Item } from '../order.service';
+import { OrderService, Order, Item } from './order.service';
 import { Subscription } from 'rxjs';
 
 

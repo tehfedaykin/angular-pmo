@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Order } from '../../order.service';
+import { Order } from '../order.service';
 
 @Component({
   selector: 'pmo-order-details',

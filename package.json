@@ -21,12 +21,14 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
+    "@types/socket.io-client": "^1.4.32",
     "bootstrap": "4.2.1",
     "core-js": "^2.5.4",
     "ngx-bootstrap": "^3.2.0",
     "place-my-order-api": "^1.0.1",
     "place-my-order-assets": "^0.1.7",
     "rxjs": "~6.3.3",
+    "socket.io-client": "^2.2.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

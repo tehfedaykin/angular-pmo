@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService, Order } from 'src/app/order.service';
+import { OrderService, Order } from '../order.service';
 import { Config } from '../../restaurant/restaurant.service';
 
 interface Data<T> {
