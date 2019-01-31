@@ -2,14 +2,14 @@
   <nav>
    <h1>place-my-order.com</h1>
    <ul>
-     <li>
-       <a routerLink="/" routerLinkActive="active">Home</a>
+     <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+       <a routerLink="/" >Home</a>
      </li>
-     <li>
-       <a routerLink="/restaurants" routerLinkActive="active">Restaurants</a>
+     <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+       <a routerLink="/restaurants" >Restaurants</a>
      </li>
-     <li>
-       <a routerLink="/order-history" routerLinkActive="active">Order History</a>
+     <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+       <a routerLink="/order-history" >Order History</a>
      </li>
    </ul>
   </nav>
