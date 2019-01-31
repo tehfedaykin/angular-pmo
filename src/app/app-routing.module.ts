@@ -9,10 +9,9 @@ import { OrderHistoryComponent } from './order/history/history.component';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomeComponent,
   },
-  //{ path: '',   redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'restaurants',
     component: RestaurantComponent,

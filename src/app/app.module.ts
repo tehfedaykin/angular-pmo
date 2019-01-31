@@ -7,7 +7,6 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { HomeComponent } from './home/home.component';
@@ -22,7 +21,6 @@ import { OrderHistoryComponent } from './order/history/history.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     MenuComponent,
     RestaurantComponent,
     HomeComponent,
