@@ -39,7 +39,7 @@ export class RestaurantComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-
+    this.states.isPending = true;
     this.restaurantService.getStates().subscribe((res: Config<State>) => {
       this.states.value = res.data;
       this.states.isPending = false;
@@ -59,11 +59,16 @@ export class RestaurantComponent implements OnInit {
   onChanges(): void {
     let state:string;
     this.form.get('state').valueChanges.subscribe(val => {
+      console.log('state', state, val);
       if (val) {
         this.form.get('city').enable({
           onlySelf: true, 
           emitEvent: false
         });
+        if (state != val) {
+          this.form.get('city').patchValue('');
+          this.restaurants.value = [];
+        }
         this.getCities(val);
         state = val;
       }
@@ -73,6 +78,7 @@ export class RestaurantComponent implements OnInit {
           emitEvent: false
         });
         state = '';
+        this.restaurants.value = [];
       }
     });
 
@@ -84,6 +90,7 @@ export class RestaurantComponent implements OnInit {
   }
 
   getCities(state:string) {
+    this.cities.isPending = true;
     this.restaurantService.getCities(state).subscribe((res: Config<City>) => {
       this.cities.value = res.data;
       this.cities.isPending = false;
