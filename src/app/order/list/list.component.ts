@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {  Order } from '../order.service';
+import {  Order, OrderService } from '../order.service';
 
 
 @Component({
@@ -16,18 +16,24 @@ export class OrderListComponent implements OnInit {
   @Input() actionTitle: string;
   @Input() emptyMessage: string;
   isPending: boolean = false;
-  constructor() { }
+
+  constructor(private orderService: OrderService) { }
 
   ngOnInit() {
 
   }
 
-  markAs() {
-
+  markAs(order: Order, action: string) {
+    this.orderService.updateOrder(order, action).subscribe((res) => {
+      console.log(order, res);
+    });
   }
   
-  delete(order:Order) {
-    console.log('deleting', order);
+  delete(id:string) {
+    console.log('deleting', id);
+    this.orderService.deleteOrder(id).subscribe((res) => {
+      console.log(res);
+    })
   }
 
 }

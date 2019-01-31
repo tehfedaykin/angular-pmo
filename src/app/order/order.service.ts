@@ -27,9 +27,16 @@ export class OrderService {
     return this.httpClient.get('/api/orders');
   }
 
-  createOrder(formData: Order) {
-    formData.status = 'new';
-    return this.httpClient.post('/api/orders', formData)
+  createOrder(order: Order) {
+    let orderData = Object.assign({}, order);
+    orderData.status = 'new';
+    return this.httpClient.post('/api/orders', orderData)
+  }
+
+  updateOrder(order: Order, action: string) {
+    let orderData = Object.assign({}, order);
+    orderData.status = action;
+    return this.httpClient.put('/api/orders/' + orderData._id, orderData);
   }
 
   deleteOrder(id: string) {

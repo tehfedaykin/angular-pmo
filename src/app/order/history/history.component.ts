@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService, Order } from '../order.service';
 import { Config } from '../../restaurant/restaurant.service';
+import * as io from 'socket.io-client';
 
 interface Data<T> {
   value: Array<T>;
@@ -17,15 +18,38 @@ export class OrderHistoryComponent implements OnInit {
     value: [],
     isPending: true
   }
+  socket: SocketIOClient.Socket;
 
-  constructor(private orderService: OrderService) { }
+  constructor(
+    private orderService: OrderService
+    ) { 
+      this.socket = io('http://localhost:7070');
+      console.log(this.socket);
+    }
 
   ngOnInit() {
+    this.getOrders();
+
+    this.socket.on('orders created', (msg: any) => {
+      console.log('created', msg);
+      this.getOrders();
+    });
+
+    this.socket.on('orders updated', (msg: any) => {
+      console.log('updated', msg);
+      this.getOrders();
+    });
+
+    this.socket.on('orders removed', (msg: any) => {
+      console.log('removed', msg);
+      this.getOrders();
+    });
+  }
+
+  getOrders() {
     this.orderService.getOrders().subscribe((res: Config<Order>) => {
       this.orders.value = res.data;
-    })
-
-    //subscribe to events for orders
+    });
   }
 
   get newOrders() {

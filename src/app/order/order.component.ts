@@ -79,6 +79,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     this.orderProcessing = true;
     this.orderService.createOrder(this.orderForm.value).subscribe((res: Order) => {
       this.completedOrder = res;
+      this.completedOrder.total = this.orderTotal;
       this.orderComplete = true;
       this.orderProcessing = false;
     });
