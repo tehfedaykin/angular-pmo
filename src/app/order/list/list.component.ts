@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {  Order, OrderService } from '../order.service';
+import { Order, OrderService } from '../order.service';
 
 
 @Component({
@@ -19,21 +19,19 @@ export class OrderListComponent implements OnInit {
 
   constructor(private orderService: OrderService) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   markAs(order: Order, action: string) {
-    this.orderService.updateOrder(order, action).subscribe((res) => {
-      console.log(order, res);
+    this.orderService.updateOrder(order, action).subscribe(() => {
     });
   }
   
   delete(id:string) {
-    console.log('deleting', id);
-    this.orderService.deleteOrder(id).subscribe((res) => {
-      console.log(res);
+    this.orderService.deleteOrder(id).subscribe(() => {
     })
   }
 
+  total(items: []) {
+    return this.orderService.getTotal(items);
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Order } from '../order.service';
+import { Order, OrderService } from '../order.service';
 
 @Component({
   selector: 'pmo-order-details',
@@ -8,9 +8,10 @@ import { Order } from '../order.service';
 })
 export class OrderDetailsComponent implements OnInit {
   @Input() order: Order;
-  constructor() { }
+  orderTotal: number = 0.0;
+  constructor(private orderService: OrderService) { }
 
   ngOnInit() {
+    this.orderTotal = this.orderService.getTotal(this.order.items);
   }
-
 }

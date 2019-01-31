@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService, Order } from '../order.service';
 import { Config } from '../../restaurant/restaurant.service';
 import * as io from 'socket.io-client';
+import { environment } from '../../../environments/environment';
 
 interface Data<T> {
   value: Array<T>;
@@ -23,26 +24,25 @@ export class OrderHistoryComponent implements OnInit {
   constructor(
     private orderService: OrderService
     ) { 
-      this.socket = io('http://localhost:7070');
-      console.log(this.socket);
+      this.socket = io(environment.apiUrl);
     }
 
   ngOnInit() {
     this.getOrders();
 
-    this.socket.on('orders created', (msg: any) => {
-      console.log('created', msg);
-      this.getOrders();
+    this.socket.on('orders created', (order: Order) => {
+      this.orders.value.push(order);
     });
 
-    this.socket.on('orders updated', (msg: any) => {
-      console.log('updated', msg);
-      this.getOrders();
+    this.socket.on('orders updated', (order: Order) => {
+      let orderIndex =  this.orders.value.findIndex(item => item._id === order._id);
+      this.orders.value.splice(orderIndex, 1);
+      this.orders.value.push(order);
     });
 
-    this.socket.on('orders removed', (msg: any) => {
-      console.log('removed', msg);
-      this.getOrders();
+    this.socket.on('orders removed', (order: Order) => {
+      let orderIndex =  this.orders.value.findIndex(item => item._id === order._id);
+      this.orders.value.splice(orderIndex, 1);
     });
   }
 

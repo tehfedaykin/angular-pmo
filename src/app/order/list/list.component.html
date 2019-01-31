@@ -1,4 +1,4 @@
-<h4>{{this.listTitle}}</h4>
+<h4>{{listTitle}}</h4>
 <div class="loading" *ngIf="isPending"></div>
 <ng-container *ngFor="let order of orders">
   <div [ngClass]="['order', order.status? order.status: '']">
@@ -12,14 +12,14 @@
       </ul>
     </div>
   
-    <div class="total">${{order.total}}</div>
+    <div class="total">${{total(order.items)}}</div>
   
     <div class="actions">
-      <span class="badge">{{this.statusTitle}}</span>
+      <span class="badge">{{statusTitle}}</span>
         <p class="action" *ngIf="action">
           Mark as:
           <a href="javascript://" (click)="markAs(order, action)">
-            {{this.actionTitle}}
+            {{actionTitle}}
           </a>
         </p>
   
@@ -30,4 +30,4 @@
   </div>
 </ng-container>
 
-<div class="order empty">{{this.emptyMessage}}</div>
+<div class="order empty">{{emptyMessage}}</div>
