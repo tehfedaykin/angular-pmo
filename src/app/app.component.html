@@ -5,8 +5,8 @@
      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
        <a routerLink="/" >Home</a>
      </li>
-     <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-       <a routerLink="/restaurants" >Restaurants</a>
+     <li [ngClass]="{'active' : rla.isActive} ">
+       <a routerLink="/restaurants" routerLinkActive #rla="routerLinkActive">Restaurants</a>
      </li>
      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
        <a routerLink="/order-history" >Order History</a>

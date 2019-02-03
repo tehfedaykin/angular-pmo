@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { RestaurantService, Config, City, State } from './restaurant.service';
 import { Restaurant } from './restaurant';
@@ -14,8 +15,9 @@ export interface Data<T> {
   templateUrl: './restaurant.component.html',
   styleUrls: ['./restaurant.component.less']
 })
-export class RestaurantComponent implements OnInit {
+export class RestaurantComponent implements OnInit, OnDestroy {
   form: FormGroup;
+  private subscription: Subscription;
 
   public restaurants: Data<Restaurant> = {
     value: [],
@@ -47,6 +49,10 @@ export class RestaurantComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   createForm() {
     this.form = this.fb.group({
       state: {value: '', disabled: true},
@@ -58,7 +64,7 @@ export class RestaurantComponent implements OnInit {
 
   onChanges(): void {
     let state:string;
-    this.form.get('state').valueChanges.subscribe(val => {
+    let stateChanges = this.form.get('state').valueChanges.subscribe(val => {
       console.log('state', state, val);
       if (val) {
         this.form.get('city').enable({
@@ -81,12 +87,14 @@ export class RestaurantComponent implements OnInit {
         this.restaurants.value = [];
       }
     });
+    this.subscription = stateChanges;
 
-    this.form.get('city').valueChanges.subscribe(val => {
+    let cityChanges = this.form.get('city').valueChanges.subscribe(val => {
       if (val) {
         this.getRestaurants(state, val);
       }
     });
+    this.subscription.add(cityChanges)
   }
 
   getCities(state:string) {

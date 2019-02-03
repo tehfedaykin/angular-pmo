@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-//import { switchMap } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
 
-import { RestaurantService, Config } from '../restaurant.service';
+import { RestaurantService } from '../restaurant.service';
 import { Restaurant } from '../restaurant';
 
 @Component({
@@ -12,8 +10,6 @@ import { Restaurant } from '../restaurant';
   styleUrls: ['./detail.component.css']
 })
 export class RestaurantDetailComponent implements OnInit {
-  isPending$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  restaurant$: Observable<Config<Restaurant>>;
   restaurant: Restaurant;
   isLoading: boolean = true;
 
@@ -23,11 +19,6 @@ export class RestaurantDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.restaurant$ = this.route.paramMap.pipe(
-    //   switchMap((params: ParamMap) =>
-    //     this.restaurantService.getRestaurant(params.get('slug')))
-    // );
-
     const slug = this.route.snapshot.paramMap.get('slug');
     this.restaurantService.getRestaurant(slug)
      .subscribe((data:Restaurant) => {
