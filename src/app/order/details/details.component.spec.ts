@@ -1,33 +1,51 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { OrderService } from '../order.service';
 
 import { OrderDetailsComponent } from './details.component';
 
-let fakeOrder = {
-  address: "285 W Adams Ave",
-  phone: '555-555-5555',
-  items: [
-    {name: "Spinach Fennel Watercress Ravioli", price: 35.99}, 
-    {name: "Truffle Noodles", price: 14.99},
-  ],
-  name: "Justin Meyer",
-  slug: "cheese-curd-city",
-  status: "delivered",
-  _id: "2CM3Qbs5toq3Dq0x"
-};
 describe('OrderDetailsComponent', () => {
   let component: OrderDetailsComponent;
   let fixture: ComponentFixture<OrderDetailsComponent>;
 
-  beforeEach(async(() => {
+  let orderServiceSpy: jasmine.SpyObj<OrderService>;
+  let fakeOrder: any;
+
+  beforeEach(() => {
+    orderServiceSpy = jasmine.createSpyObj('OrderService', ['getTotal']);
+    orderServiceSpy.getTotal.and.returnValue(2);
+
+    fakeOrder = {
+      address: "285 W Adams Ave",
+      phone: '555-555-5555',
+      items: [
+        {name: "Spinach Fennel Watercress Ravioli", price: 35.99}, 
+        {name: "Truffle Noodles", price: 14.99},
+      ],
+      name: "Justin Meyer",
+      slug: "cheese-curd-city",
+      status: "delivered",
+      _id: "2CM3Qbs5toq3Dq0x"
+    };
+
+  });
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrderDetailsComponent ]
+      declarations: [ OrderDetailsComponent ],
+      providers: [
+        HttpClient,
+        HttpHandler,
+        {provide: OrderService, useValue: orderServiceSpy}
+      ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OrderDetailsComponent);
     component = fixture.componentInstance;
+    component.order = fakeOrder;
     fixture.detectChanges();
   });
 
