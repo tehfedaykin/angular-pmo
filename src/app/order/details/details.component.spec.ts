@@ -1,4 +1,4 @@
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OrderService } from '../order.service';
 
@@ -32,10 +32,9 @@ describe('OrderDetailsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [ HttpClientModule ],
       declarations: [ OrderDetailsComponent ],
       providers: [
-        HttpClient,
-        HttpHandler,
         {provide: OrderService, useValue: orderServiceSpy}
       ]
     })
