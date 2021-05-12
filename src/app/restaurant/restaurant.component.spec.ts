@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { of } from 'rxjs';
@@ -85,7 +85,7 @@ describe('RestaurantComponent', () => {
   let component: RestaurantComponent;
   let fixture: ComponentFixture<RestaurantComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ RestaurantComponent ],
       imports: [ReactiveFormsModule, RouterModule],
@@ -94,7 +94,7 @@ describe('RestaurantComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RestaurantComponent);
