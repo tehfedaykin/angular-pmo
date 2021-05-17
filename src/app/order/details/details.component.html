@@ -1,11 +1,11 @@
-<h3>Thanks for your order {{order.name}}!</h3>
+<h3>Thanks for your order {{order?.name ?? ''}}!</h3>
 <div><label class="control-label">
-  Confirmation Number: {{order._id}}</label>
+  Confirmation Number: {{order?._id ?? ''}}</label>
 </div>
 
 <h4>Items ordered:</h4>
 <ul class="list-group panel">
-  <li class="list-group-item" *ngFor="let item of order.items">
+  <li class="list-group-item" *ngFor="let item of order?.items">
     <label>
       {{item.name}} <span class="badge">${{item.price}}</span>
     </label>
@@ -19,8 +19,8 @@
 </ul>
 
 <div><label class="control-label">
-  Phone: {{order.phone}}
+  Phone: {{order?.phone ?? ''}}
 </label></div>
 <div><label class="control-label">
-  Address: {{order.address}}
+  Address: {{order?.address ?? ''}}
 </label></div>
