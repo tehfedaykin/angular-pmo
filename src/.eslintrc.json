@@ -21,7 +21,10 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": [
+              "app",
+              "pmo"
+            ],
             "style": "kebab-case"
           }
         ],
