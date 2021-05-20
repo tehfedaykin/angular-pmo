@@ -17,7 +17,6 @@ export interface Data<T> {
 })
 export class RestaurantComponent implements OnInit, OnDestroy {
   form!: FormGroup;
-  private subscription: Subscription | undefined;
 
   public restaurants: Data<Restaurant> = {
     value: [],
@@ -32,6 +31,8 @@ export class RestaurantComponent implements OnInit, OnDestroy {
     value: [],
     isPending: true
   };
+
+  private subscription: Subscription | undefined;
 
   constructor(
     private restaurantService: RestaurantService,
@@ -73,6 +74,7 @@ export class RestaurantComponent implements OnInit, OnDestroy {
           onlySelf: true,
           emitEvent: false
         });
+        // eslint-disable-next-line eqeqeq
         if (state != val) {
           this.form.get('city')!.patchValue('');
           this.restaurants.value = [];

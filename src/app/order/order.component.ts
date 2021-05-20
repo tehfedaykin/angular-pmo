@@ -8,14 +8,12 @@ import { OrderService, Order } from './order.service';
 import { Subscription } from 'rxjs';
 
 
-function minLengthArray(min: number) {
-  return (c: AbstractControl): {[key: string]: any} | null => {
-      if (c.value.length >= min) {
-return null;
-}
-      return { minLengthArray: {valid: false }};
-  };
-}
+const minLengthArray = (min: number) => (c: AbstractControl): {[key: string]: any} | null => {
+  if (c.value.length >= min) {
+    return null;
+  }
+  return { minLengthArray: {valid: false }};
+};
 
 @Component({
   selector: 'pmo-order',
