@@ -10,10 +10,11 @@ import { Subscription } from 'rxjs';
 
 function minLengthArray(min: number) {
   return (c: AbstractControl): {[key: string]: any} | null => {
-      if (c.value.length >= min)
-          return null;
-      return { 'minLengthArray': {valid: false }};
-  }
+      if (c.value.length >= min) {
+return null;
+}
+      return { minLengthArray: {valid: false }};
+  };
 }
 
 @Component({
@@ -24,29 +25,29 @@ function minLengthArray(min: number) {
 export class OrderComponent implements OnInit, OnDestroy {
   orderForm!: FormGroup;
   restaurant?: Restaurant;
-  isLoading: boolean = true;
-  orderTotal: number = 0.0;
+  isLoading = true;
+  orderTotal = 0.0;
   completedOrder?: Order;
-  orderComplete: boolean = false;
-  orderProcessing: boolean = false;
+  orderComplete = false;
+  orderProcessing = false;
   private subscription?: Subscription;
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private restaurantService: RestaurantService,
     private orderService: OrderService,
-    private formBuilder: FormBuilder 
-  ) { 
+    private formBuilder: FormBuilder
+  ) {
   }
 
   ngOnInit() {
     const slug = this.route.snapshot.paramMap.get('slug') as string;
 
-    this.restaurantService.getRestaurant(slug).subscribe((data:Restaurant) => {
+    this.restaurantService.getRestaurant(slug).subscribe((data: Restaurant) => {
       this.restaurant = data;
-      this.isLoading = false;      
+      this.isLoading = false;
       this.createOrderForm();
-    })
+    });
   }
 
   ngOnDestroy(): void {

@@ -31,25 +31,24 @@ export class MenuItemsComponent implements ControlValueAccessor {
     this.onTouched();
   }
 
-  registerOnChange( fn : any ) : void {
+  registerOnChange( fn: any ): void {
     this.onChange = fn;
   }
 
-  registerOnTouched( fn : any ) : void {
+  registerOnTouched( fn: any ): void {
     this.onTouched = fn;
   }
 
-  writeValue(value:any) {
+  writeValue(value: any) {
     this.value = value;
   }
 
   toggleItem(item: Item) {
     if (this._value) {
-      let index = this._value.indexOf(item);
+      const index = this._value.indexOf(item);
       if(index !== -1) {
-        this._value.splice(index, 1)
-      }
-      else {
+        this._value.splice(index, 1);
+      } else {
         this._value.push(item);
       }
       this.writeValue(this._value);

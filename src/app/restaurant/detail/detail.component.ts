@@ -11,24 +11,24 @@ import { Restaurant } from '../restaurant';
 })
 export class RestaurantDetailComponent implements OnInit {
   restaurant?: Restaurant;
-  isLoading: boolean = true;
+  isLoading = true;
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private restaurantService: RestaurantService
   ) { }
 
   ngOnInit() {
     const slug = this.route.snapshot.paramMap.get('slug') as string;
     this.restaurantService.getRestaurant(slug)
-     .subscribe((data:Restaurant) => {
+     .subscribe((data: Restaurant) => {
        this.restaurant = data;
        this.isLoading = false;
       });
   }
 
-  getUrl(image:string): string {
-    return image.replace('node_modules/place-my-order-assets', './assets')
+  getUrl(image: string): string {
+    return image.replace('node_modules/place-my-order-assets', './assets');
   }
 
 }

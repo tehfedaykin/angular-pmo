@@ -20,7 +20,7 @@ describe('RestaurantService', () => {
       providers: [
         RestaurantService
       ]
-    })
+    });
 
     restaurantService = TestBed.get(RestaurantService);
     //httpMock = TestBed.get(HttpTestingController);

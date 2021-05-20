@@ -28,4 +28,3 @@ export interface Restaurant {
     address: Address;
     _id: string;
 }
-  

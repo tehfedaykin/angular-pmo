@@ -22,16 +22,16 @@ export class RestaurantComponent implements OnInit, OnDestroy {
   public restaurants: Data<Restaurant> = {
     value: [],
     isPending: false
-  }
+  };
   public states: Data<State> = {
     value: [],
     isPending: true
-  }
+  };
 
   public cities: Data<City> = {
     value: [],
     isPending: true
-  }
+  };
 
   constructor(
     private restaurantService: RestaurantService,
@@ -65,12 +65,12 @@ export class RestaurantComponent implements OnInit, OnDestroy {
   }
 
   onChanges(): void {
-    let state:string;
-    let stateChanges = this.form.get('state')!.valueChanges.subscribe(val => {
+    let state: string;
+    const stateChanges = this.form.get('state')!.valueChanges.subscribe(val => {
       console.log('state', state, val);
       if (val) {
         this.form.get('city')!.enable({
-          onlySelf: true, 
+          onlySelf: true,
           emitEvent: false
         });
         if (state != val) {
@@ -79,10 +79,9 @@ export class RestaurantComponent implements OnInit, OnDestroy {
         }
         this.getCities(val);
         state = val;
-      }
-      else {
+      } else {
         this.form.get('city')!.disable({
-          onlySelf: true, 
+          onlySelf: true,
           emitEvent: false
         });
         state = '';
@@ -91,27 +90,27 @@ export class RestaurantComponent implements OnInit, OnDestroy {
     });
     this.subscription = stateChanges;
 
-    let cityChanges = this.form.get('city')!.valueChanges.subscribe(val => {
+    const cityChanges = this.form.get('city')!.valueChanges.subscribe(val => {
       if (val) {
         this.getRestaurants(state, val);
       }
     });
-    this.subscription.add(cityChanges)
+    this.subscription.add(cityChanges);
   }
 
-  getCities(state:string) {
+  getCities(state: string) {
     this.cities.isPending = true;
     this.restaurantService.getCities(state).subscribe((res: Config<City>) => {
       this.cities.value = res.data;
       this.cities.isPending = false;
       this.form.get('city')!.enable({
-        onlySelf: true, 
+        onlySelf: true,
         emitEvent: false
       });
     });
   }
 
-  getRestaurants(state:string, city:string) {
+  getRestaurants(state: string, city: string) {
     this.restaurantService.getRestaurants(state, city).subscribe((res: Config<Restaurant>) => {
       this.restaurants.value = res.data;
       this.restaurants.isPending = false;

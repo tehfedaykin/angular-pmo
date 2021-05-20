@@ -18,12 +18,12 @@ export class OrderHistoryComponent implements OnInit {
   public orders: Data<Order> = {
     value: [],
     isPending: true
-  }
+  };
   socket: SocketIOClient.Socket;
 
   constructor(
     private orderService: OrderService
-    ) { 
+    ) {
       this.socket = io(environment.apiUrl);
     }
 
@@ -35,13 +35,13 @@ export class OrderHistoryComponent implements OnInit {
     });
 
     this.socket.on('orders updated', (order: Order) => {
-      let orderIndex =  this.orders.value.findIndex(item => item._id === order._id);
+      const orderIndex =  this.orders.value.findIndex(item => item._id === order._id);
       this.orders.value.splice(orderIndex, 1);
       this.orders.value.push(order);
     });
 
     this.socket.on('orders removed', (order: Order) => {
-      let orderIndex =  this.orders.value.findIndex(item => item._id === order._id);
+      const orderIndex =  this.orders.value.findIndex(item => item._id === order._id);
       this.orders.value.splice(orderIndex, 1);
     });
   }
@@ -53,30 +53,22 @@ export class OrderHistoryComponent implements OnInit {
   }
 
   get newOrders() {
-    let orders =  this.orders.value.filter((order) => {
-      return order.status === "new";
-    });
+    const orders =  this.orders.value.filter((order) => order.status === 'new');
     return orders;
   }
 
    get preparingOrders() {
-    let orders =  this.orders.value.filter((order) => {
-      return order.status === "preparing";
-    });
+    const orders =  this.orders.value.filter((order) => order.status === 'preparing');
     return orders;
    }
 
    get deliveryOrders() {
-    let orders =  this.orders.value.filter((order) => {
-      return order.status === "delivery";
-    });
+    const orders =  this.orders.value.filter((order) => order.status === 'delivery');
     return orders;
    }
 
    get deliveredOrders() {
-    let orders =  this.orders.value.filter((order) => {
-      return order.status === "delivered";
-    });
+    const orders =  this.orders.value.filter((order) => order.status === 'delivered');
     return orders;
    }
 

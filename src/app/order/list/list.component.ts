@@ -15,7 +15,7 @@ export class OrderListComponent implements OnInit {
   @Input() action?: string;
   @Input() actionTitle?: string;
   @Input() emptyMessage?: string;
-  isPending: boolean = false;
+  isPending = false;
 
   constructor(private orderService: OrderService) { }
 
@@ -25,10 +25,10 @@ export class OrderListComponent implements OnInit {
     this.orderService.updateOrder(order, action).subscribe(() => {
     });
   }
-  
-  delete(id:string) {
+
+  delete(id: string) {
     this.orderService.deleteOrder(id).subscribe(() => {
-    })
+    });
   }
 
   total(items: []) {

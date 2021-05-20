@@ -8,7 +8,7 @@ import { Order, OrderService } from '../order.service';
 })
 export class OrderDetailsComponent implements OnInit {
   @Input() order?: Order;
-  orderTotal: number = 0.0;
+  orderTotal = 0.0;
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
