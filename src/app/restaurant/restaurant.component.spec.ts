@@ -113,23 +113,23 @@ describe('RestaurantComponent', () => {
   });
 
   it('should enable the state input when states have been fetched', () => {
-    expect(component.form.get('state').enabled).toBeTruthy();
+    expect(component.form.get('state')!.enabled).toBeTruthy();
   });
 
   it('should enable the cities input when state has a value', () => {
-    component.form.get('state').patchValue('IL');
-    expect(component.form.get('city').enabled).toBeTruthy();
+    component.form.get('state')!.patchValue('IL');
+    expect(component.form.get('city')!.enabled).toBeTruthy();
   });
 
   it('should fetch a list of cities when state has a value', () => {
-    component.form.get('state').patchValue('IL');
+    component.form.get('state')!.patchValue('IL');
     expect(component.cities.value).toEqual([{"name":"Chicago","state":"IL"},
     {"name":"Peoria","state":"IL"}])
   });
 
   it('should fetch a list of restaurants when state and city have values', () => {
-    component.form.get('state').patchValue('IL');
-    component.form.get('city').patchValue('Chicago');
+    component.form.get('state')!.patchValue('IL');
+    component.form.get('city')!.patchValue('Chicago');
     expect(component.restaurants.value).toEqual(fakeRestaurants.data)
   });
 });
