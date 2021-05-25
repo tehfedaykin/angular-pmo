@@ -67,7 +67,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   onChanges() {
-    this.subscription = this.orderForm.get('items')!.valueChanges.subscribe(val => {
+    this.subscription = this.orderForm.get('items')?.valueChanges.subscribe(val => {
       this.orderTotal = this.orderService.getTotal(val);
     });
   }
