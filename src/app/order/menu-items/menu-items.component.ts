@@ -14,9 +14,9 @@ import { Item }  from '../order.service';
   ]
 })
 export class MenuItemsComponent implements ControlValueAccessor {
-  @Input() data: [];
+  @Input() data?: [];
 
-  @Input('value') _value: Item[];
+  @Input('value') _value?: Item[];
 
   onChange: any = () => { };
   onTouched: any = () => { };
@@ -44,14 +44,16 @@ export class MenuItemsComponent implements ControlValueAccessor {
   }
 
   toggleItem(item: Item) {
-    let index = this._value.indexOf(item);
-    if(index !== -1) {
-      this._value.splice(index, 1)
+    if (this._value) {
+      let index = this._value.indexOf(item);
+      if(index !== -1) {
+        this._value.splice(index, 1)
+      }
+      else {
+        this._value.push(item);
+      }
+      this.writeValue(this._value);
     }
-    else {
-      this._value.push(item);
-    }
-    this.writeValue(this._value);
   }
 
 }

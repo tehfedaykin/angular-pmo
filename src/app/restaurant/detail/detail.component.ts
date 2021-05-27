@@ -10,7 +10,7 @@ import { Restaurant } from '../restaurant';
   styleUrls: ['./detail.component.css']
 })
 export class RestaurantDetailComponent implements OnInit {
-  restaurant: Restaurant;
+  restaurant?: Restaurant;
   isLoading: boolean = true;
 
   constructor(
@@ -19,7 +19,7 @@ export class RestaurantDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const slug = this.route.snapshot.paramMap.get('slug');
+    const slug = this.route.snapshot.paramMap.get('slug') as string;
     this.restaurantService.getRestaurant(slug)
      .subscribe((data:Restaurant) => {
        this.restaurant = data;

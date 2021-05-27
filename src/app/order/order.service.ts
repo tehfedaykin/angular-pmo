@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Config } from '../restaurant/restaurant.service';
 
 export interface Item {
   name: string;
@@ -23,13 +25,13 @@ export class OrderService {
   constructor(private httpClient: HttpClient) { }
 
   getOrders() {
-    return this.httpClient.get('/api/orders');
+    return this.httpClient.get('/api/orders') as Observable<Config<Order>>;
   }
 
-  createOrder(order: Order) {
+  createOrder(order: Order): Observable<Order> {
     let orderData = Object.assign({}, order);
     orderData.status = 'new';
-    return this.httpClient.post('/api/orders', orderData)
+    return this.httpClient.post('/api/orders', orderData) as Observable<Order>;
   }
 
   updateOrder(order: Order, action: string) {

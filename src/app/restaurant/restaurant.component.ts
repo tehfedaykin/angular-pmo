@@ -16,8 +16,8 @@ export interface Data<T> {
   styleUrls: ['./restaurant.component.less']
 })
 export class RestaurantComponent implements OnInit, OnDestroy {
-  form: FormGroup;
-  private subscription: Subscription;
+  form!: FormGroup;
+  private subscription: Subscription | undefined;
 
   public restaurants: Data<Restaurant> = {
     value: [],
@@ -45,12 +45,14 @@ export class RestaurantComponent implements OnInit, OnDestroy {
     this.restaurantService.getStates().subscribe((res: Config<State>) => {
       this.states.value = res.data;
       this.states.isPending = false;
-      this.form.get('state').enable();
+      this.form.get('state')!.enable();
     });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   createForm() {
@@ -64,22 +66,22 @@ export class RestaurantComponent implements OnInit, OnDestroy {
 
   onChanges(): void {
     let state:string;
-    let stateChanges = this.form.get('state').valueChanges.subscribe(val => {
+    let stateChanges = this.form.get('state')!.valueChanges.subscribe(val => {
       console.log('state', state, val);
       if (val) {
-        this.form.get('city').enable({
+        this.form.get('city')!.enable({
           onlySelf: true, 
           emitEvent: false
         });
         if (state != val) {
-          this.form.get('city').patchValue('');
+          this.form.get('city')!.patchValue('');
           this.restaurants.value = [];
         }
         this.getCities(val);
         state = val;
       }
       else {
-        this.form.get('city').disable({
+        this.form.get('city')!.disable({
           onlySelf: true, 
           emitEvent: false
         });
@@ -89,7 +91,7 @@ export class RestaurantComponent implements OnInit, OnDestroy {
     });
     this.subscription = stateChanges;
 
-    let cityChanges = this.form.get('city').valueChanges.subscribe(val => {
+    let cityChanges = this.form.get('city')!.valueChanges.subscribe(val => {
       if (val) {
         this.getRestaurants(state, val);
       }
@@ -102,7 +104,7 @@ export class RestaurantComponent implements OnInit, OnDestroy {
     this.restaurantService.getCities(state).subscribe((res: Config<City>) => {
       this.cities.value = res.data;
       this.cities.isPending = false;
-      this.form.get('city').enable({
+      this.form.get('city')!.enable({
         onlySelf: true, 
         emitEvent: false
       });

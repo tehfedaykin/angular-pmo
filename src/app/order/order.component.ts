@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 
 import { RestaurantService } from '../restaurant/restaurant.service';
 import { Restaurant } from '../restaurant/restaurant';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 
 
 function minLengthArray(min: number) {
-  return (c: AbstractControl): {[key: string]: any} => {
+  return (c: AbstractControl): {[key: string]: any} | null => {
       if (c.value.length >= min)
           return null;
       return { 'minLengthArray': {valid: false }};
@@ -22,15 +22,14 @@ function minLengthArray(min: number) {
   styleUrls: ['./order.component.less']
 })
 export class OrderComponent implements OnInit, OnDestroy {
-  orderForm: FormGroup;
-  restaurant: Restaurant;
+  orderForm!: FormGroup;
+  restaurant?: Restaurant;
   isLoading: boolean = true;
-  items: FormArray;
   orderTotal: number = 0.0;
-  completedOrder: Order;
+  completedOrder?: Order;
   orderComplete: boolean = false;
   orderProcessing: boolean = false;
-  private subscription: Subscription;
+  private subscription?: Subscription;
 
   constructor(
     private route: ActivatedRoute, 
@@ -41,7 +40,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const slug = this.route.snapshot.paramMap.get('slug');
+    const slug = this.route.snapshot.paramMap.get('slug') as string;
 
     this.restaurantService.getRestaurant(slug).subscribe((data:Restaurant) => {
       this.restaurant = data;
@@ -51,12 +50,15 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   createOrderForm() {
+    const restaurantId = this.restaurant && this.restaurant._id || null;
     this.orderForm = this.formBuilder.group({
-      restaurant: [this.restaurant._id],
+      restaurant: [restaurantId],
       name: [null],
       address:  [null],
       phone: [null],
@@ -66,15 +68,15 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   onChanges() {
-    this.subscription = this.orderForm.get('items').valueChanges.subscribe(val => {
+    this.subscription = this.orderForm.get('items')!.valueChanges.subscribe(val => {
       this.orderTotal = this.orderService.getTotal(val);
     });
   }
 
   onSubmit() {
     this.orderProcessing = true;
-    this.orderService.createOrder(this.orderForm.value).subscribe((res: Order) => {
-      this.completedOrder = res;
+    this.orderService.createOrder(this.orderForm.value).subscribe(newOrder => {
+      this.completedOrder = newOrder;
       this.orderComplete = true;
       this.orderProcessing = false;
     });

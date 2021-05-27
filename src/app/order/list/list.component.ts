@@ -8,13 +8,13 @@ import { Order, OrderService } from '../order.service';
   styleUrls: ['./list.component.css']
 })
 export class OrderListComponent implements OnInit {
-  @Input() orders: [];
-  @Input() listTitle: string;
-  @Input() status: string;
-  @Input() statusTitle: string;
-  @Input() action: string;
-  @Input() actionTitle: string;
-  @Input() emptyMessage: string;
+  @Input() orders?: [];
+  @Input() listTitle?: string;
+  @Input() status?: string;
+  @Input() statusTitle?: string;
+  @Input() action?: string;
+  @Input() actionTitle?: string;
+  @Input() emptyMessage?: string;
   isPending: boolean = false;
 
   constructor(private orderService: OrderService) { }
