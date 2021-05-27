@@ -29,13 +29,13 @@ export class OrderService {
   }
 
   createOrder(order: Order): Observable<Order> {
-    let orderData = Object.assign({}, order);
+    const orderData = Object.assign({}, order);
     orderData.status = 'new';
     return this.httpClient.post('/api/orders', orderData) as Observable<Order>;
   }
 
   updateOrder(order: Order, action: string) {
-    let orderData = Object.assign({}, order);
+    const orderData = Object.assign({}, order);
     orderData.status = action;
     return this.httpClient.put('/api/orders/' + orderData._id, orderData);
   }
@@ -44,7 +44,7 @@ export class OrderService {
     return this.httpClient.delete('/api/orders/' + id);
   }
 
-  getTotal(items:Array<Item>) {
+  getTotal(items: Array<Item>) {
     let total = 0.0;
     items.forEach((item: Item) => {
       total += item.price;

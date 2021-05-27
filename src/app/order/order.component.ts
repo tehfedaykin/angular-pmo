@@ -8,13 +8,12 @@ import { OrderService, Order } from './order.service';
 import { Subscription } from 'rxjs';
 
 
-function minLengthArray(min: number) {
-  return (c: AbstractControl): {[key: string]: any} | null => {
-      if (c.value.length >= min)
-          return null;
-      return { 'minLengthArray': {valid: false }};
+const minLengthArray = (min: number) => (c: AbstractControl): {[key: string]: any} | null => {
+  if (c.value.length >= min) {
+    return null;
   }
-}
+  return { minLengthArray: {valid: false }};
+};
 
 @Component({
   selector: 'pmo-order',
@@ -24,29 +23,29 @@ function minLengthArray(min: number) {
 export class OrderComponent implements OnInit, OnDestroy {
   orderForm!: FormGroup;
   restaurant?: Restaurant;
-  isLoading: boolean = true;
-  orderTotal: number = 0.0;
+  isLoading = true;
+  orderTotal = 0.0;
   completedOrder?: Order;
-  orderComplete: boolean = false;
-  orderProcessing: boolean = false;
+  orderComplete = false;
+  orderProcessing = false;
   private subscription?: Subscription;
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private restaurantService: RestaurantService,
     private orderService: OrderService,
-    private formBuilder: FormBuilder 
-  ) { 
+    private formBuilder: FormBuilder
+  ) {
   }
 
   ngOnInit() {
     const slug = this.route.snapshot.paramMap.get('slug') as string;
 
-    this.restaurantService.getRestaurant(slug).subscribe((data:Restaurant) => {
+    this.restaurantService.getRestaurant(slug).subscribe((data: Restaurant) => {
       this.restaurant = data;
-      this.isLoading = false;      
+      this.isLoading = false;
       this.createOrderForm();
-    })
+    });
   }
 
   ngOnDestroy(): void {
@@ -68,7 +67,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   onChanges() {
-    this.subscription = this.orderForm.get('items')!.valueChanges.subscribe(val => {
+    this.subscription = this.orderForm.get('items')?.valueChanges.subscribe(val => {
       this.orderTotal = this.orderService.getTotal(val);
     });
   }

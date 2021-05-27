@@ -22,18 +22,18 @@ export interface City {
 export class RestaurantService {
 
   constructor(private httpClient: HttpClient) { }
-  
+
   getStates() {
     return this.httpClient.get<Config<State>>('/api/states');
   }
 
-  getCities(state:string) {
+  getCities(state: string) {
     const options = { params: new HttpParams().set('state', state)};
     return this.httpClient.get<Config<City>>('/api/cities', options);
   }
 
-  getRestaurants(state:string, city: string) {
-    let options = { params: new HttpParams().set('filter[address.state]', state).set('filter[address.city]', city) };
+  getRestaurants(state: string, city: string) {
+    const options = { params: new HttpParams().set('filter[address.state]', state).set('filter[address.city]', city) };
     return this.httpClient.get<Config<Restaurant>>('/api/restaurants', options);
   }
 

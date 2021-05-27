@@ -16,16 +16,16 @@ describe('OrderDetailsComponent', () => {
     orderServiceSpy.getTotal.and.returnValue(2);
 
     fakeOrder = {
-      address: "285 W Adams Ave",
+      address: '285 W Adams Ave',
       phone: '555-555-5555',
       items: [
-        {name: "Spinach Fennel Watercress Ravioli", price: 35.99}, 
-        {name: "Truffle Noodles", price: 14.99},
+        {name: 'Spinach Fennel Watercress Ravioli', price: 35.99},
+        {name: 'Truffle Noodles', price: 14.99},
       ],
-      name: "Justin Meyer",
-      slug: "cheese-curd-city",
-      status: "delivered",
-      _id: "2CM3Qbs5toq3Dq0x"
+      name: 'Justin Meyer',
+      slug: 'cheese-curd-city',
+      status: 'delivered',
+      _id: '2CM3Qbs5toq3Dq0x'
     };
 
   });
