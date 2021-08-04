@@ -17,6 +17,7 @@ import { OrderDetailsComponent } from './order/details/details.component';
 import { MenuItemsComponent } from './order/menu-items/menu-items.component';
 import { OrderListComponent } from './order/list/list.component';
 import { OrderHistoryComponent } from './order/history/history.component';
+import { OnlyNumbersDirective } from './only-numbers.directive';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { OrderHistoryComponent } from './order/history/history.component';
     OrderDetailsComponent,
     MenuItemsComponent,
     OrderListComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    OnlyNumbersDirective
   ],
   imports: [
     BrowserModule,
