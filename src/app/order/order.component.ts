@@ -5,7 +5,8 @@ import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { RestaurantService } from '../restaurant/restaurant.service';
 import { Restaurant } from '../restaurant/restaurant';
 import { OrderService, Order } from './order.service';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from "rxjs/operators";
 
 
 const minLengthArray = (min: number) => (c: AbstractControl): {[key: string]: any} | null => {
@@ -28,7 +29,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   completedOrder?: Order;
   orderComplete = false;
   orderProcessing = false;
-  private subscription?: Subscription;
+  private unSubscribe = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
@@ -49,9 +50,8 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.unSubscribe.next();
+    this.unSubscribe.complete();
   }
 
   createOrderForm() {
@@ -67,7 +67,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   onChanges() {
-    this.subscription = this.orderForm.get('items')?.valueChanges.subscribe(val => {
+    this.orderForm.get('items')?.valueChanges.pipe(takeUntil(this.unSubscribe)).subscribe(val => {
       this.orderTotal = this.orderService.getTotal(val);
     });
   }

@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Restaurant } from './restaurant';
 
 export interface Config<T> {
-  data: Array<T>;
+  data: T[];
 }
 
 export interface State {

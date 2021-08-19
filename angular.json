@@ -144,6 +144,7 @@
   },
   "defaultProject": "sample-pmo",
   "cli": {
+    "analytics": false,
     "defaultCollection": "@angular-eslint/schematics"
   }
 }

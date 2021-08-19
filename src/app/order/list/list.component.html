@@ -5,15 +5,15 @@
     <address>
       {{order.name}} <br />{{order.address}} <br />{{order.phone}}
     </address>
-  
+
     <div class="items">
       <ul>
         <li *ngFor="let item of order.items">{{item.name}}</li>
       </ul>
     </div>
-  
-    <div class="total">${{total(order.items)}}</div>
-  
+
+    <div class="total">{{total(order.items) | currency:'USD'}}</div>
+
     <div class="actions">
       <span class="badge">{{statusTitle}}</span>
         <p class="action" *ngIf="action">
@@ -22,7 +22,7 @@
             {{actionTitle}}
           </a>
         </p>
-  
+
       <p class="action">
         <a href="javascript://"  (click)="delete(order._id)">Delete</a>
       </p>
