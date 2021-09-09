@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { OrderComponent } from './order.component';
+import {ItemTotalPipe} from "../shared/item-total.pipe";
 
 describe('OrderComponent', () => {
   let component: OrderComponent;
@@ -16,6 +17,7 @@ describe('OrderComponent', () => {
         ReactiveFormsModule,
         RouterModule.forRoot([])
       ],
+      providers: [ItemTotalPipe],
       declarations: [ OrderComponent ]
     })
     .compileComponents();

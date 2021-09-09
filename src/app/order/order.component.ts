@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, AbstractControl, Validators } from '@angular/forms';
 
 import { RestaurantService } from '../restaurant/restaurant.service';
 import { Restaurant } from '../restaurant/restaurant';
-import { OrderService, Order } from './order.service';
+import { OrderService, Order, Item } from './order.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from "rxjs/operators";
+import { ItemTotalPipe } from "../shared/item-total.pipe";
 
 
 const minLengthArray = (min: number) => (c: AbstractControl): {[key: string]: any} | null => {
@@ -35,7 +36,8 @@ export class OrderComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private restaurantService: RestaurantService,
     private orderService: OrderService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private itemTotal: ItemTotalPipe,
   ) {
   }
 
@@ -58,17 +60,17 @@ export class OrderComponent implements OnInit, OnDestroy {
     const restaurantId = this.restaurant && this.restaurant._id || null;
     this.orderForm = this.formBuilder.group({
       restaurant: [restaurantId],
-      name: [null],
-      address:  [null],
-      phone: [null],
+      name: [null, Validators.required],
+      address:  [null, Validators.required],
+      phone: [null,  Validators.required],
       items: [[], minLengthArray(1)]
     });
     this.onChanges();
   }
 
   onChanges() {
-    this.orderForm.get('items')?.valueChanges.pipe(takeUntil(this.unSubscribe)).subscribe(val => {
-      this.orderTotal = this.orderService.getTotal(val);
+    this.orderForm.get('items')?.valueChanges.pipe(takeUntil(this.unSubscribe)).subscribe((val: Item[]) => {
+      this.orderTotal = this.itemTotal.transform(val);
     });
   }
 

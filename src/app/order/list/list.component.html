@@ -12,7 +12,7 @@
       </ul>
     </div>
 
-    <div class="total">{{total(order.items) | currency:'USD'}}</div>
+    <div class="total">{{(order.items | itemTotal) | currency}}</div>
 
     <div class="actions">
       <span class="badge">{{statusTitle}}</span>

@@ -36,7 +36,7 @@
         <p class="help-text">Please enter your phone number.</p>
       </div>
       <div class="submit">
-        <h4>Total: {{orderTotal | currency:'USD'}}</h4>
+        <h4>Total: {{orderTotal | currency}}</h4>
           <div class="loading" *ngIf="orderProcessing"></div>
           <button type="submit" [disabled]="!orderForm.valid || orderProcessing" class="btn">
             Place My Order!

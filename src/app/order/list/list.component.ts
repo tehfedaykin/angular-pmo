@@ -8,7 +8,7 @@ import { Order, OrderService } from '../order.service';
   styleUrls: ['./list.component.css']
 })
 export class OrderListComponent implements OnInit {
-  @Input() orders?: [];
+  @Input() orders: Order[] = [];
   @Input() listTitle?: string;
   @Input() status?: string;
   @Input() statusTitle?: string;
@@ -31,7 +31,4 @@ export class OrderListComponent implements OnInit {
     });
   }
 
-  total(items: []) {
-    return this.orderService.getTotal(items);
-  }
 }

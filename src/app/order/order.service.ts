@@ -44,12 +44,4 @@ export class OrderService {
     return this.httpClient.delete('/api/orders/' + id);
   }
 
-  getTotal(items: Item[]) {
-    let total = 0.0;
-    items.forEach((item: Item) => {
-      total += item.price;
-    });
-    return Math.round(total * 100) / 100;
-  }
-
 }

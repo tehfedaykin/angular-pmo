@@ -27,7 +27,7 @@
     "core-js": "^3.12.1",
     "ngx-bootstrap": "^3.2.0",
     "place-my-order-api": "^1.0.1",
-    "place-my-order-assets": "^0.1.7",
+    "place-my-order-assets": "^0.2.2",
     "rxjs": "^6.5.3",
     "socket.io-client": "^2.2.0",
     "tslib": "^1.10.0",
