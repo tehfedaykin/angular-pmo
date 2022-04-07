@@ -48,8 +48,9 @@ export class RestaurantComponent implements OnInit, OnDestroy {
       tap((res: Config<State>) => {
         this.states.value = res.data;
         this.states.isPending = false;
-        this.form.get('states')?.enable();
-      }));
+        this.form.get('state')?.enable();
+      })
+    ).subscribe();
   }
 
   ngOnDestroy(): void {
@@ -107,14 +108,17 @@ export class RestaurantComponent implements OnInit, OnDestroy {
 
   getCities(state: string) {
     this.cities.isPending = true;
-    this.restaurantService.getCities(state).subscribe((res: Config<City>) => {
-      this.cities.value = res.data;
-      this.cities.isPending = false;
-      this.form.get('city')?.enable({
-        onlySelf: true,
-        emitEvent: false,
-      });
-    });
+    this.restaurantService.getCities(state).pipe(
+      takeUntil(this.unSubscribe),
+      tap((res: Config<City>) => {
+        this.cities.value = res.data;
+        this.cities.isPending = false;
+        this.form.get('city')?.enable({
+          onlySelf: true,
+          emitEvent: false
+        });
+      })
+    ).subscribe();
   }
 
   getRestaurants(state: string, city: string) {
