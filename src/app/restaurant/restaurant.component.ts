@@ -30,7 +30,7 @@ export class RestaurantComponent implements OnInit, OnDestroy {
 
   public cities: Data<City> = {
     value: [],
-    isPending: true,
+    isPending: false,
   };
 
   private unSubscribe = new Subject<void>();
@@ -122,11 +122,12 @@ export class RestaurantComponent implements OnInit, OnDestroy {
   }
 
   getRestaurants(state: string, city: string) {
-    this.restaurantService
-      .getRestaurants(state, city)
-      .subscribe((res: Config<Restaurant>) => {
+    this.restaurantService.getRestaurants(state, city).pipe(
+      takeUntil(this.unSubscribe),
+      tap((res: Config<Restaurant>) => {
         this.restaurants.value = res.data;
         this.restaurants.isPending = false;
-      });
+      })
+    ).subscribe();
   }
 }

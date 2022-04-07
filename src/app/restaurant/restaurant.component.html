@@ -6,7 +6,7 @@
       <select class="formControl" formControlName="state">
         <option value="" *ngIf="states.isPending">Loading...</option>
         <ng-container *ngIf="!states.isPending">
-          <option value="">Choose a state</option>
+          <option value="" disabled>Choose a state</option>
           <option *ngFor="let state of states.value" value="{{state?.short}}"> {{state?.name}}</option>
         </ng-container>
       </select>
@@ -16,7 +16,7 @@
       <select class="formControl" formControlName="city">
         <option value="" *ngIf="cities.isPending">Loading...</option>
         <ng-container *ngIf="!cities.isPending">
-          <option value="">Choose a city</option>
+          <option value="" disabled>Choose a city</option>
           <option *ngFor="let city of cities.value" value="{{city.name}}"> {{city.name}}</option>
         </ng-container>
       </select>
