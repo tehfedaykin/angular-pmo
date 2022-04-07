@@ -122,6 +122,7 @@ export class RestaurantComponent implements OnInit, OnDestroy {
   }
 
   getRestaurants(state: string, city: string) {
+    this.restaurants.isPending = true;
     this.restaurantService.getRestaurants(state, city).pipe(
       takeUntil(this.unSubscribe),
       tap((res: Config<Restaurant>) => {
