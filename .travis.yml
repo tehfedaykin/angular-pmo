@@ -5,8 +5,6 @@ dist: trusty
 sudo: required
 branches:
   only:
-  - master
-before_script:
-  - npm install -g @angular/cli
+    - master
 script:
-- ng build --prod --base-href https://tehfedaykin.github.io/angular-pmo/
+  - ng build
