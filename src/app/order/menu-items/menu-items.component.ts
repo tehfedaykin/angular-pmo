@@ -14,7 +14,7 @@ import { Item }  from '../order.service';
   ]
 })
 export class MenuItemsComponent implements ControlValueAccessor {
-  @Input() data?: [];
+  @Input() data?: Item[];
 
   // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('value') _value?: Item[];

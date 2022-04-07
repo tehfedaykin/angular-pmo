@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Order, OrderService } from '../order.service';
+import {Order} from "../order.service";
 
 @Component({
   selector: 'pmo-order-details',
@@ -7,15 +7,13 @@ import { Order, OrderService } from '../order.service';
   styleUrls: ['./details.component.css']
 })
 export class OrderDetailsComponent implements OnInit {
-  @Input() order?: Order;
-  orderTotal = 0.0;
-  constructor(private orderService: OrderService) { }
+  @Input() order? : Order;
+
+  constructor() { }
 
   ngOnInit() {
     if (!this.order) {
       throw new Error('Order is not defined');
     }
-
-    this.orderTotal = this.orderService.getTotal(this.order.items);
   }
 }

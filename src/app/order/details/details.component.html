@@ -7,13 +7,13 @@
 <ul class="list-group panel">
   <li class="list-group-item" *ngFor="let item of order?.items">
     <label>
-      {{item.name}} <span class="badge">${{item.price}}</span>
+      {{item.name}} <span class="badge">{{item.price | currency}}</span>
     </label>
   </li>
 
   <li class="list-group-item">
     <label>
-      Total <span class="badge">${{orderTotal}}</span>
+      Total <span class="badge">{{(order?.items | itemTotal) | currency}}</span>
     </label>
   </li>
 </ul>

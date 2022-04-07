@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "api": "place-my-order-api --port 7070"
+    "api": "place-my-order-api --port 7070",
+    "start:all": "npm run api & npm run start"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +27,7 @@
     "core-js": "^3.12.1",
     "ngx-bootstrap": "^3.2.0",
     "place-my-order-api": "^1.0.1",
-    "place-my-order-assets": "^0.2.1",
+    "place-my-order-assets": "^0.2.2",
     "rxjs": "^6.5.3",
     "socket.io-client": "^2.2.0",
     "tslib": "^1.10.0",

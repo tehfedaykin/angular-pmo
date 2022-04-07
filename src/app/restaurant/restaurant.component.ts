@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import {Subject} from 'rxjs';
 
 import { RestaurantService, Config, City, State } from './restaurant.service';
 import { Restaurant } from './restaurant';
+import {takeUntil} from "rxjs/operators";
 
 export interface Data<T> {
   value: Array<T>;
@@ -32,7 +33,7 @@ export class RestaurantComponent implements OnInit, OnDestroy {
     isPending: true
   };
 
-  private subscription: Subscription | undefined;
+  private unSubscribe = new Subject<void>();
 
   constructor(
     private restaurantService: RestaurantService,
@@ -51,9 +52,8 @@ export class RestaurantComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.unSubscribe.next()
+    this.unSubscribe.complete();
   }
 
   createForm() {
@@ -67,7 +67,7 @@ export class RestaurantComponent implements OnInit, OnDestroy {
 
   onChanges(): void {
     let state: string;
-    const stateChanges = this.form.get('state')?.valueChanges.subscribe(val => {
+    this.form.get('state')?.valueChanges.pipe(takeUntil(this.unSubscribe)).subscribe(val => {
       console.log('state', state, val);
       if (val) {
         this.form.get('city')?.enable({
@@ -90,14 +90,12 @@ export class RestaurantComponent implements OnInit, OnDestroy {
         this.restaurants.value = [];
       }
     });
-    this.subscription = stateChanges;
 
-    const cityChanges = this.form.get('city')?.valueChanges.subscribe(val => {
+    this.form.get('city')?.valueChanges.pipe(takeUntil(this.unSubscribe)).subscribe(val => {
       if (val) {
         this.getRestaurants(state, val);
       }
     });
-    this.subscription?.add(cityChanges);
   }
 
   getCities(state: string) {

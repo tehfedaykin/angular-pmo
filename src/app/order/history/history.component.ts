@@ -5,7 +5,7 @@ import * as io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
 
 interface Data<T> {
-  value: Array<T>;
+  value: T[];
   isPending: boolean;
 }
 
@@ -15,7 +15,7 @@ interface Data<T> {
   styleUrls: ['./history.component.css']
 })
 export class OrderHistoryComponent implements OnInit {
-  public orders: Data<Order> = {
+  orders: Data<Order> = {
     value: [],
     isPending: true
   };

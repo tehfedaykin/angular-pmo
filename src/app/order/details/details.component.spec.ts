@@ -1,19 +1,16 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { OrderService } from '../order.service';
 
 import { OrderDetailsComponent } from './details.component';
+import {ItemTotalPipe} from "../../shared/item-total.pipe";
 
 describe('OrderDetailsComponent', () => {
   let component: OrderDetailsComponent;
   let fixture: ComponentFixture<OrderDetailsComponent>;
 
-  let orderServiceSpy: jasmine.SpyObj<OrderService>;
   let fakeOrder: any;
 
   beforeEach(() => {
-    orderServiceSpy = jasmine.createSpyObj('OrderService', ['getTotal']);
-    orderServiceSpy.getTotal.and.returnValue(2);
 
     fakeOrder = {
       address: '285 W Adams Ave',
@@ -33,10 +30,7 @@ describe('OrderDetailsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientModule ],
-      declarations: [ OrderDetailsComponent ],
-      providers: [
-        {provide: OrderService, useValue: orderServiceSpy}
-      ]
+      declarations: [ OrderDetailsComponent, ItemTotalPipe ]
     })
     .compileComponents();
   });
